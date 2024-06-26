@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Multi Phone Number</title>
+        <link href="./libs/jquery-ui-1.13.3.custom/jquery-ui.min.css" rel="stylesheet" type="text/css">
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style type="text/css">
+            *{
+                box-sizing: border-box;
+            }
+
+            body{
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container{
+                width: 500px;
+                padding: 15px;
+            }
+
+            .form-group label{
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-control{
+                width: 80%;
+                font-size: 15px;
+                padding: 5px;
+                margin: 10px 0;
+            }
+
+            .addbtn,.removebtn{
+                background-color: green;
+                color: #fff;
+                font-size: 12px;
+                text-decoration: none;
+                border-radius: 5px;
+                padding: 8px;
+                margin: 0 5px;
+            }
+
+            .removebtn{
+                background-color: red;
+            }
+
+            .disabled{
+                background-color: gray;
+            }
+        </style>
+       
+    </head>
+    <body>
+
+        <div class="container">
+
+
+                
+         <h3>Multi Phone Number</h3>
+      
+         <form action="" method="">
+            <div class="form-group phonenumbers">
+            <label for="phone">Mobile Phone</label>            
+            <input type="text" name="phone[]" id="phone" class="form-control " placeholder="Enter Your Phone"/><a href="#" class="addbtn">Add</a>
+            </div>
+         </form>
+
+        </div>
+              
+          
+      
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="text/javascript"></script>
+        <script src="./libs/jquery-ui-1.13.3.custom/jquery-ui.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                let maxnum = 5;
+                let addbtn = $(".addbtn");
+                const phonebox = $(".phonenumbers");
+                let newphoneelement;
+
+                let idx = 1;
+
+                //add
+
+                addbtn.click(function(){
+
+                    // idx++;
+                    console.log(idx);
+
+                    if(idx < maxnum){
+                        idx++;
+                        newphoneelement = `<div><input type="text" name="phone[]" id="phone${idx}" class="form-control " placeholder="Enter Your Phone"/><a href="#" class="removebtn">Remove</a></div>`;
+                        $(phonebox).append(newphoneelement);
+                    }else{
+                        $(this).addClass("disabled");
+                    }
+
+                    //remove
+                    $(phonebox).on("click",".removebtn",function(){
+                        $(this).parent().remove();
+                        idx--;
+
+                        if(idx < maxnum){
+                            $(addbtn).removeClass("disabled");
+                        }
+                    })
+
+                })
+
+             
+            });
+
+         
+            
+
+        </script>
+    </body>
+</html>
